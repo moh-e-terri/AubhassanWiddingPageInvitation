@@ -24,6 +24,13 @@ export function FooterSection() {
         <span>ملاحظة: {copy.noPhotosNote}</span>
         <Sparkles size={14} color="#c9a24d" aria-hidden />
       </div>
+
+      <div className="footer__made-by-wrap">
+        <p className="footer__made-by">
+          {copy.footerMadeBy}
+          <Heart size={14} fill="#e74c3c" color="#e74c3c" className="footer__made-by-heart" aria-hidden />
+        </p>
+      </div>
     </footer>
   );
 }

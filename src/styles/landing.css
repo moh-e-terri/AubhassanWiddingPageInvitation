@@ -289,6 +289,32 @@
   }
 }
 
+.scroll-to-top {
+  position: fixed;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  z-index: 100;
+  width: 3.2rem;
+  height: 3.2rem;
+  display: grid;
+  place-items: center;
+  border: 1.5px solid rgba(201, 162, 77, 0.45);
+  border-radius: 999px;
+  background: rgba(18, 19, 22, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--color-gold-light);
+  cursor: pointer;
+  box-shadow: var(--shadow-soft);
+  transition: background 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.scroll-to-top:hover {
+  background: rgba(201, 162, 77, 0.16);
+  border-color: var(--color-gold);
+  box-shadow: var(--shadow-gold);
+}
+
 /* Hero — نص فخم + صورة العريس */
 .hero {
   position: relative;
@@ -1854,6 +1880,29 @@
   background: rgba(255, 255, 255, 0.04);
   color: var(--color-text-muted);
   font-size: 0.8rem;
+}
+
+.footer__made-by-wrap {
+  margin-top: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(201, 162, 77, 0.22);
+}
+
+.footer__made-by {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  margin: 0;
+  color: var(--color-gold-light);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+}
+
+.footer__made-by-heart {
+  flex-shrink: 0;
 }
 
 @media (max-width: 480px) {

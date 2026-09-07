@@ -9,6 +9,7 @@ import { EngagementVideoSection } from '@/features/landing/components/Engagement
 import { EventDetailsSection } from '@/features/landing/components/EventDetailsSection';
 import { MapSection } from '@/features/landing/components/MapSection';
 import { FooterSection } from '@/features/landing/components/FooterSection';
+import { ScrollToTopButton } from '@/features/landing/components/ScrollToTopButton';
 
 export function LandingPage() {
   return (
@@ -25,6 +26,7 @@ export function LandingPage() {
       <EventDetailsSection />
       <MapSection />
       <FooterSection />
+      <ScrollToTopButton />
     </>
   );
 }

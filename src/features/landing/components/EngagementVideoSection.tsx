@@ -9,7 +9,7 @@ import {
 } from '@/lib/audio/backgroundAudio';
 
 export function EngagementVideoSection() {
-  const { media, groom } = weddingConfig;
+  const { media, copy } = weddingConfig;
   const videoRef = useRef<HTMLVideoElement>(null);
   const wasMusicPlayingRef = useRef(false);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -63,7 +63,7 @@ export function EngagementVideoSection() {
           لحظات الخطوبة
         </h2>
         <p className="section__subtitle engagement-video-section__subtitle">
-          فيديو من أيام الخطوبة — إنتاج {groom.nickname}
+          {copy.engagementSubtitle}
         </p>
 
         <div className="engagement-video-section__player">

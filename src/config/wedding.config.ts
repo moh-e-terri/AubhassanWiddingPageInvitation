@@ -94,6 +94,8 @@ export const weddingConfig = {
     formalOutro: 'يتم الفرح بقدومكم.. ودامت بيوتكم عامرة بالأفراح',
     footerQuote: 'بوجودكم يتم لنا الفرح والسرور.. والعاقبة لديكم بالمسرات',
     noPhotosNote: 'يمنع التصوير بالجوال',
+    engagementSubtitle: 'شكرا لكل من ترك بصمة واثر جميل',
+    footerMadeBy: 'صنع بحب Eng. Mohammed E Alterri',
   },
 } as const;
 
