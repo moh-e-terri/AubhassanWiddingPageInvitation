@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
-import { ChevronDown, Heart } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { weddingConfig } from '@/config/wedding.config';
 
 export function HeroSection() {
-  const { groom, bride, copy, event } = weddingConfig;
+  const { copy } = weddingConfig;
 
   return (
     <section id="hero" className="hero" aria-label="التهنئة">
@@ -21,30 +21,13 @@ export function HeroSection() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
       >
-        <header className="hero__intro">
-          <p className="hero__eyebrow">{copy.heroEyebrow}</p>
-        </header>
-
-        <div className="hero__names">
-          <h1 className="hero__name gold-text">
-            {groom.fullName}
-            <span className="hero__nickname">({groom.nickname})</span>
-          </h1>
-
-          <div className="hero__divider" aria-hidden>
-            <span />
-            <Heart size={16} color="#c9a24d" strokeWidth={1.75} />
-            <span />
-          </div>
-
-          <h2 className="hero__name gold-text">{bride.fullName}</h2>
-        </div>
-
         <blockquote className="hero__quote">"{copy.heroQuote}"</blockquote>
 
-        <p className="hero__date">
-          {event.day} · {event.dateShort} · {event.time}
-        </p>
+        <header className="hero__intro">
+          <p className="hero__invite-lead">{copy.heroInviteLead}</p>
+          <p className="hero__invite-name gold-text">{copy.heroInviteName}</p>
+          <p className="hero__invite-nickname">({copy.heroInviteNickname})</p>
+        </header>
 
         <motion.a
           href="#invitation"

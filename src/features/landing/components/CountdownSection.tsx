@@ -40,7 +40,7 @@ function CountdownCard({
 
   return (
     <motion.div
-      className={`countdown-unit${unit === 'seconds' ? ' countdown-unit--seconds' : ''}`}
+      className={`countdown-unit countdown-unit--${unit}`}
       initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.08, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}

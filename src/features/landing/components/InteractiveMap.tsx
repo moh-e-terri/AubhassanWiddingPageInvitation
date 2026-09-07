@@ -50,6 +50,32 @@ function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number) {
   return earthRadiusKm * (2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)));
 }
 
+function drawRouteOnMap(
+  map: L.Map,
+  coords: [number, number][],
+  layers: L.Layer[],
+  dashed = false,
+) {
+  const glowLine = L.polyline(coords, {
+    color: '#c9a24d',
+    weight: 8,
+    opacity: 0.25,
+    lineCap: 'round',
+  }).addTo(map);
+  layers.push(glowLine);
+
+  const routeLine = L.polyline(coords, {
+    color: '#c9a24d',
+    weight: 4,
+    opacity: 0.92,
+    lineCap: 'round',
+    ...(dashed ? { dashArray: '12 8' } : {}),
+  }).addTo(map);
+  layers.push(routeLine);
+
+  return routeLine;
+}
+
 function InteractiveMap() {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstance = useRef<L.Map | null>(null);
@@ -113,14 +139,18 @@ function InteractiveMap() {
       userMarkerRef.current = userMarker;
       routeLayersRef.current.push(userMarker);
 
+      const straightCoords: [number, number][] = [
+        [startLat, startLng],
+        [mapConfig.lat, mapConfig.lng],
+      ];
+
+      const fitToRoute = (line: L.Polyline) => {
+        map.fitBounds(line.getBounds(), { padding: [60, 60] });
+      };
+
       if (!mapConfig.orsApiKey) {
-        map.fitBounds(
-          L.latLngBounds([
-            [startLat, startLng],
-            [mapConfig.lat, mapConfig.lng],
-          ]),
-          { padding: [60, 60] },
-        );
+        const routeLine = drawRouteOnMap(map, straightCoords, routeLayersRef.current, true);
+        fitToRoute(routeLine);
         showDistanceBadge(straightDistance, isFallback);
         setStatus('ready');
         return;
@@ -137,44 +167,25 @@ function InteractiveMap() {
             (coordinate: number[]) => [coordinate[1], coordinate[0]] as [number, number],
           );
 
-          const glowLine = L.polyline(coords, {
-            color: '#c9a24d',
-            weight: 8,
-            opacity: 0.25,
-            lineCap: 'round',
-          }).addTo(map);
-          routeLayersRef.current.push(glowLine);
-
-          const routeLine = L.polyline(coords, {
-            color: '#c9a24d',
-            weight: 4,
-            opacity: 0.9,
-            lineCap: 'round',
-            dashArray: '12 8',
-          }).addTo(map);
-          routeLayersRef.current.push(routeLine);
-
-          map.fitBounds(routeLine.getBounds(), { padding: [60, 60] });
+          const routeLine = drawRouteOnMap(map, coords, routeLayersRef.current);
+          fitToRoute(routeLine);
 
           const routeDistance = data.features[0].properties?.summary?.distance;
           const km = routeDistance ? (routeDistance / 1000).toFixed(1) : straightDistance;
           setDistanceKm(km);
           showDistanceBadge(km, isFallback);
         } else {
+          const routeLine = drawRouteOnMap(map, straightCoords, routeLayersRef.current, true);
+          fitToRoute(routeLine);
           showDistanceBadge(straightDistance, isFallback);
-          map.fitBounds(
-            L.latLngBounds([
-              [startLat, startLng],
-              [mapConfig.lat, mapConfig.lng],
-            ]),
-            { padding: [60, 60] },
-          );
         }
 
         setStatus('ready');
       } catch {
+        const routeLine = drawRouteOnMap(map, straightCoords, routeLayersRef.current, true);
+        fitToRoute(routeLine);
         showDistanceBadge(straightDistance, isFallback);
-        setStatus('error');
+        setStatus('ready');
       }
     },
     [clearRouteArtifacts, showDistanceBadge],
@@ -218,14 +229,16 @@ function InteractiveMap() {
 
     const venueMarker = L.marker([mapConfig.lat, mapConfig.lng], { icon: venueIcon }).addTo(map);
     venueMarker
-      .bindPopup(`
-      <div style="font-family:Tajawal,sans-serif;text-align:center;direction:rtl;padding:4px 0">
-        <h3 style="margin:0 0 6px;font-size:1.1rem;color:#c9a24d">حفل الزفاف</h3>
-        <p style="margin:4px 0;color:#333;font-size:.9rem"><b>${event.venue}</b></p>
-        <p style="margin:4px 0;color:#555;font-size:.85rem">${event.time}</p>
-        <p style="margin:4px 0;color:#555;font-size:.85rem">${event.venueDetail}</p>
+      .bindPopup(
+        `
+      <div class="map-venue-popup">
+        <h3 class="map-venue-popup__title">حفل الزفاف</h3>
+        <p class="map-venue-popup__venue">${event.venue}</p>
+        <p class="map-venue-popup__meta">${event.time} · ${event.venueDetail}</p>
       </div>
-    `)
+    `,
+        { maxWidth: 132, minWidth: 0, className: 'map-venue-popup-wrap' },
+      )
       .openPopup();
 
     return () => {

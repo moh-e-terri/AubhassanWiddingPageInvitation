@@ -32,22 +32,27 @@ export function SplashScreen() {
           exit={{ opacity: 0, scale: 1.05 }}
           transition={{ duration: 0.8, ease: 'easeInOut' }}
         >
+          <div className="splash-overlay__bg" aria-hidden>
+            <div className="splash-overlay__base" />
+            <div className="splash-overlay__aurora splash-overlay__aurora--1" />
+            <div className="splash-overlay__aurora splash-overlay__aurora--2" />
+            <div className="splash-overlay__sheen" />
+            <div className="splash-overlay__vignette" />
+            <div className="splash-overlay__grain" />
+          </div>
+
           <motion.div
             className="splash-content"
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.25 }}
           >
-            <div className="splash-card glass">
+            <div className="splash-card">
               <div className="splash-card__text">
                 <p className="splash-card__bismillah">{copy.splashBismillah}</p>
                 <p className="splash-card__subtitle">{copy.splashSubtitle}</p>
-                <p className="splash-card__names gold-text">
-                  {copy.splashGroomName}{' '}
-                  <span className="splash-card__nickname">({copy.splashGroomNickname})</span>
-                  {' & '}
-                  {copy.splashBrideName}
-                </p>
+                <p className="splash-card__names gold-text">{copy.splashGroomName}</p>
+                <p className="splash-card__nickname">({copy.splashGroomNickname})</p>
               </div>
 
               <div className="splash-card__actions">

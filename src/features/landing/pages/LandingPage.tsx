@@ -4,7 +4,6 @@ import { MusicToggle } from '@/features/landing/components/MusicToggle';
 import { HeroSection } from '@/features/landing/components/HeroSection';
 import { GroomGallerySection } from '@/features/landing/components/GroomGallerySection';
 import { InvitationSection } from '@/features/landing/components/InvitationSection';
-import { FormalTextSection } from '@/features/landing/components/FormalTextSection';
 import { CountdownSection } from '@/features/landing/components/CountdownSection';
 import { EngagementVideoSection } from '@/features/landing/components/EngagementVideoSection';
 import { EventDetailsSection } from '@/features/landing/components/EventDetailsSection';
@@ -21,7 +20,6 @@ export function LandingPage() {
       <HeroSection />
       <GroomGallerySection />
       <InvitationSection />
-      <FormalTextSection />
       <CountdownSection />
       <EngagementVideoSection />
       <EventDetailsSection />

@@ -410,7 +410,13 @@ a {
 }
 
 .event-details__card {
-  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  min-height: 7.25rem;
+  padding: 1.35rem 1.25rem;
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   border: 1px solid rgba(201, 162, 77, 0.25);
@@ -418,12 +424,19 @@ a {
   box-shadow: var(--shadow-soft);
 }
 
+.event-details__card--wide {
+  min-height: auto;
+  gap: 0.75rem;
+  padding: 1.5rem 1.35rem 1.35rem;
+}
+
 .event-details__icon {
   display: inline-grid;
   place-items: center;
   width: 3rem;
   height: 3rem;
-  margin: 0 auto 0.75rem;
+  margin: 0;
+  flex-shrink: 0;
   border-radius: 999px;
   color: var(--color-gold-light);
   background: linear-gradient(145deg, rgba(201, 162, 77, 0.16), rgba(201, 162, 77, 0.04));
@@ -433,12 +446,20 @@ a {
     0 8px 20px rgba(0, 0, 0, 0.22);
 }
 
-.event-details__card h3 {
-  margin: 0 0 0.35rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--color-gold);
-  letter-spacing: 0.06em;
+.event-details__value {
+  margin: 0;
+  font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+  font-weight: 600;
+  color: var(--color-cream);
+  line-height: 1.5;
+}
+
+.event-details__venue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
+  width: 100%;
 }
 
 .event-details__card p {
@@ -448,10 +469,21 @@ a {
 }
 
 .event-details__sub {
-  margin-top: 0.25rem !important;
-  font-size: 0.9rem !important;
+  margin-top: 0 !important;
+  font-size: 0.88rem !important;
   font-weight: 400 !important;
   color: var(--color-text-muted) !important;
+  line-height: 1.55;
+}
+
+.event-details__note {
+  margin-top: 0.45rem !important;
+  padding-top: 0.55rem;
+  border-top: 1px solid rgba(201, 162, 77, 0.22);
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  color: var(--color-gold-light) !important;
+  line-height: 1.5;
 }
 
 /* Footer */
@@ -480,15 +512,66 @@ a {
 .naqoot-page__header,
 .admin-page__header {
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.naqoot-page__header {
+  padding-top: 50px;
+}
+
+.naqoot-page__topbar {
+  display: none;
 }
 
 .naqoot-page__back {
-  display: inline-block;
-  margin-bottom: 1rem;
+  position: fixed;
+  top: max(1rem, env(safe-area-inset-top, 0px));
+  left: 1rem;
+  z-index: 1200;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.55rem 1rem;
   text-decoration: none;
   color: var(--color-gold-light);
-  font-weight: 600;
+  font-weight: 700;
+  font-size: 0.88rem;
+  border: 1.5px solid var(--color-gold);
+  border-radius: 999px;
+  background: rgba(18, 19, 22, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-soft);
+  transition:
+    padding 0.25s ease,
+    gap 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.naqoot-page__back-text {
+  max-width: 9rem;
+  opacity: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  transition: max-width 0.25s ease, opacity 0.2s ease;
+}
+
+.naqoot-page__back--compact {
+  padding: 0.55rem;
+  gap: 0;
+}
+
+.naqoot-page__back--compact .naqoot-page__back-text {
+  max-width: 0;
+  opacity: 0;
+}
+
+.naqoot-page__back:hover {
+  background: rgba(201, 162, 77, 0.18);
+  color: #fff;
+  box-shadow: var(--shadow-gold);
 }
 
 .naqoot-page__eyebrow {
@@ -499,37 +582,60 @@ a {
 }
 
 .naqoot-page__title {
-  margin: 0 0 0.85rem;
+  margin: 0 0 0.75rem;
   font-size: clamp(1.65rem, 5vw, 2.15rem);
   font-weight: 900;
   line-height: 1.25;
 }
 
-.naqoot-page__intro {
-  margin: 0 0 0.65rem;
-  color: var(--color-cream);
-  line-height: 1.85;
-  font-size: 1.02rem;
-}
-
 .naqoot-page__note {
   margin: 0;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
+  color: var(--color-cream);
+  font-size: 0.95rem;
+  font-weight: 600;
   line-height: 1.75;
 }
 
 .naqoot-form,
 .admin-login {
+  background: rgba(46, 46, 51, 0.78);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: clamp(1.5rem, 5vw, 2rem);
+  border-radius: 1.35rem;
+  border: 1px solid rgba(201, 162, 77, 0.32);
+  box-shadow: var(--shadow-soft), 0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+.naqoot-form {
+  display: grid;
+  gap: 0;
+}
+
+.admin-login {
   display: grid;
   gap: 1.15rem;
-  background: rgba(46, 46, 51, 0.72);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-  padding: 1.5rem;
-  border-radius: 1.35rem;
-  border: 1px solid rgba(201, 162, 77, 0.28);
-  box-shadow: var(--shadow-soft);
+}
+
+.naqoot-form__field {
+  display: grid;
+  gap: 0.85rem;
+  padding-block: 1.35rem;
+  border-bottom: 1px solid rgba(201, 162, 77, 0.12);
+}
+
+.naqoot-form__field:first-child {
+  padding-top: 0;
+}
+
+.naqoot-form__field--amount {
+  gap: 1.1rem;
+}
+
+.naqoot-form__field--amount,
+.naqoot-form__field:last-of-type {
+  padding-bottom: 1.5rem;
+  border-bottom: none;
 }
 
 .naqoot-form label,
@@ -538,53 +644,205 @@ a {
   gap: 0.45rem;
 }
 
+.naqoot-form__label-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 0.35rem;
+}
+
 .naqoot-form__label {
   font-weight: 700;
   color: var(--color-gold-light);
-  font-size: 0.92rem;
-  line-height: 1.5;
+  font-size: clamp(0.88rem, 2.5vw, 0.95rem);
+  line-height: 1.65;
+  text-wrap: balance;
+  margin: 0;
 }
 
 .naqoot-form__hint {
-  font-size: 0.78rem;
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  font-size: 0.76rem;
   color: var(--color-text-muted);
   line-height: 1.5;
+  text-align: center;
+  border-radius: 999px;
+  background: rgba(201, 162, 77, 0.07);
+  border: 1px solid rgba(201, 162, 77, 0.14);
 }
 
-.naqoot-form input,
-.naqoot-form textarea,
+.naqoot-form__label-stack {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.naqoot-form__optional {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.naqoot-form__sublabel {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+.naqoot-form__counter {
+  flex-shrink: 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  padding-top: 0.15rem;
+}
+
+.naqoot-form__input,
+.naqoot-form__textarea,
 .admin-login input {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(201, 162, 77, 0.25);
-  background: var(--color-bg-soft);
-  color: var(--color-text);
+  padding: 0.85rem 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(201, 162, 77, 0.28);
+  background: rgba(12, 12, 14, 0.72);
+  color: var(--color-cream);
   font: inherit;
+  font-size: 1rem;
+  line-height: 1.45;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.naqoot-form__input::placeholder,
+.naqoot-form__textarea::placeholder {
+  color: rgba(163, 163, 171, 0.72);
+}
+
+.naqoot-form__input:focus,
+.naqoot-form__textarea:focus,
+.admin-login input:focus {
+  outline: none;
+  border-color: rgba(201, 162, 77, 0.62);
+  box-shadow: 0 0 0 3px rgba(201, 162, 77, 0.16);
+  background: rgba(12, 12, 14, 0.92);
+}
+
+.naqoot-form__presets {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 0.45rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.naqoot-form__preset {
+  flex: 0 0 auto;
+  min-width: 2.35rem;
+  padding: 0.32rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(201, 162, 77, 0.28);
+  background: rgba(12, 12, 14, 0.55);
+  color: var(--color-cream);
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.naqoot-form__preset:hover {
+  border-color: rgba(201, 162, 77, 0.5);
+}
+
+.naqoot-form__preset--active {
+  background: linear-gradient(135deg, rgba(201, 162, 77, 0.28), rgba(201, 162, 77, 0.12));
+  border-color: var(--color-gold);
+  color: var(--color-gold-light);
+  transform: translateY(-1px);
+}
+
+.naqoot-form__stepper {
+  display: grid;
+  grid-template-columns: 3rem 1fr 3rem;
+  align-items: stretch;
+  gap: 0.75rem;
+  margin-top: 0.35rem;
+}
+
+.naqoot-form__stepper-btn {
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(201, 162, 77, 0.32);
+  border-radius: 0.85rem;
+  background: rgba(201, 162, 77, 0.1);
+  color: var(--color-gold-light);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, opacity 0.2s ease;
+}
+
+.naqoot-form__stepper-btn:hover:not(:disabled) {
+  background: rgba(201, 162, 77, 0.2);
+  border-color: rgba(201, 162, 77, 0.55);
+}
+
+.naqoot-form__stepper-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.naqoot-form__input--amount {
+  text-align: center;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-gold-light);
+  padding-block: 0.7rem;
+  -moz-appearance: textfield;
+}
+
+.naqoot-form__input--amount::-webkit-outer-spin-button,
+.naqoot-form__input--amount::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.naqoot-form__textarea {
+  resize: vertical;
+  min-height: 7rem;
+  line-height: 1.65;
+  margin-top: 0.15rem;
 }
 
 .naqoot-form textarea {
   resize: vertical;
-  min-height: 6rem;
+  min-height: 7rem;
 }
 
 .naqoot-form__submit,
-.naqoot-form button,
+.naqoot-form button.naqoot-form__submit,
 .admin-login button,
 .admin-dashboard__logout {
+  width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  padding: 0.9rem 1.35rem;
+  padding: 1rem 1.35rem;
+  margin-top: 1.35rem;
   border: none;
   border-radius: 999px;
   background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
   color: #1a1208;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 1rem;
   cursor: pointer;
   font-family: var(--font-body);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
 }
 
 .naqoot-form__submit:hover:not(:disabled) {
@@ -593,7 +851,7 @@ a {
 }
 
 .naqoot-form__submit:disabled {
-  opacity: 0.7;
+  opacity: 0.72;
   cursor: wait;
 }
 
@@ -601,20 +859,26 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.4rem;
-  margin: 0;
+  gap: 0.45rem;
+  margin: 1rem 0 0;
+  padding: 0.75rem 0.85rem;
   text-align: center;
-  line-height: 1.7;
-  font-size: 0.92rem;
+  line-height: 1.65;
+  font-size: 0.9rem;
+  border-radius: 0.85rem;
 }
 
 .naqoot-form__feedback--success {
-  color: #9fd4a0;
+  color: #b8e6b9;
+  background: rgba(76, 140, 78, 0.12);
+  border: 1px solid rgba(159, 212, 160, 0.25);
 }
 
 .naqoot-form__feedback--error,
 .admin-login__error {
   color: #f0a0a0;
+  background: rgba(180, 70, 70, 0.1);
+  border: 1px solid rgba(240, 160, 160, 0.22);
 }
 
 .naqoot-programmer-fab {
@@ -674,7 +938,7 @@ a {
 .naqoot-programmer-panel__close {
   position: absolute;
   top: 0.65rem;
-  inset-inline-start: 0.65rem;
+  left: 0.65rem;
   width: 2rem;
   height: 2rem;
   display: grid;

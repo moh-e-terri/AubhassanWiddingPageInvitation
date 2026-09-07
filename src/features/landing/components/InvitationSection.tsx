@@ -6,7 +6,7 @@ import { weddingConfig } from '@/config/wedding.config';
 const INVITATION_DOWNLOAD_NAME = 'wedding-invitation-abu-hassan.png';
 
 export function InvitationSection() {
-  const { media, groom, bride } = weddingConfig;
+  const { media, groom, bride, event } = weddingConfig;
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const closeLightbox = useCallback(() => setIsLightboxOpen(false), []);
@@ -95,6 +95,16 @@ export function InvitationSection() {
           </span>
         </button>
       </motion.div>
+
+      <motion.p
+        className="invitation-section__note"
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.08 }}
+      >
+        ملاحظة/ {event.venueDirectionNote}
+      </motion.p>
 
       <motion.div
         className="invitation-section__actions"

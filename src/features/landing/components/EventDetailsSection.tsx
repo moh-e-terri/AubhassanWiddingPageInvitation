@@ -20,43 +20,50 @@ export function EventDetailsSection() {
         transition={{ duration: 0.8 }}
       >
         <h2 id="event-heading" className="section__title">
-          تفاصيل الفرح
+          تفاصيل الموعد والمكان
         </h2>
 
         <div className="event-details__cards">
-          <motion.article className="event-details__card" {...cardMotion} transition={{ duration: 0.65 }}>
+          <motion.article
+            className="event-details__card"
+            aria-label="التاريخ"
+            {...cardMotion}
+            transition={{ duration: 0.65 }}
+          >
             <span className="event-details__icon" aria-hidden>
               <Calendar size={22} strokeWidth={1.75} />
             </span>
-            <h3>التاريخ</h3>
-            <p>
+            <p className="event-details__value">
               {event.day} — {event.dateShort}
             </p>
           </motion.article>
 
           <motion.article
             className="event-details__card"
+            aria-label="الوقت"
             {...cardMotion}
             transition={{ duration: 0.65, delay: 0.08 }}
           >
             <span className="event-details__icon" aria-hidden>
               <Clock size={22} strokeWidth={1.75} />
             </span>
-            <h3>الوقت</h3>
-            <p>{event.time}</p>
+            <p className="event-details__value">{event.time}</p>
           </motion.article>
 
           <motion.article
             className="event-details__card event-details__card--wide"
+            aria-label="المكان"
             {...cardMotion}
             transition={{ duration: 0.65, delay: 0.16 }}
           >
             <span className="event-details__icon" aria-hidden>
               <MapPin size={22} strokeWidth={1.75} />
             </span>
-            <h3>المكان</h3>
-            <p>{event.venue}</p>
-            <p className="event-details__sub">{event.venueDetail}</p>
+            <div className="event-details__venue">
+              <p className="event-details__value">{event.venue}</p>
+              <p className="event-details__sub">{event.venueDetail}</p>
+              <p className="event-details__note">{event.venueDirectionNote}</p>
+            </div>
           </motion.article>
         </div>
       </motion.div>
