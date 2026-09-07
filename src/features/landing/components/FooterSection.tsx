@@ -14,9 +14,11 @@ export function FooterSection() {
       </p>
 
       {naqoot.enabled && (
-        <Link to="/naqoot" className="footer__link">
-          نقوّط أبو حسان
-        </Link>
+        <div className="footer__naqoot-row">
+          <Link to="/naqoot" className="footer__link">
+            نقوّط أبو حسان
+          </Link>
+        </div>
       )}
 
       <div className="footer__note">

@@ -494,11 +494,6 @@ a {
   border-top: 1px solid rgba(201, 169, 98, 0.15);
 }
 
-.footer__link {
-  display: inline-block;
-  margin-top: 0.75rem;
-}
-
 /* Naqoot page */
 .naqoot-page,
 .admin-page {

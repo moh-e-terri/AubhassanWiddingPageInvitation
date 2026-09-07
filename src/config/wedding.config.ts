@@ -49,7 +49,7 @@ export const weddingConfig = {
   },
   naqoot: {
     enabled: true,
-    groomWhatsApp: '+970598668718',
+    groomWhatsApp: '+972595273790',
     minAmount: 0,
     maxAmount: 500,
     copy: {
