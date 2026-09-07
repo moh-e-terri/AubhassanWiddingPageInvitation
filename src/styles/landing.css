@@ -375,7 +375,7 @@
   text-align: center;
   width: min(100%, 40rem);
   margin-inline: auto;
-  margin-top: clamp(12rem, calc(44vh - 60px), 18.5rem);
+  margin-top: clamp(9.5rem, calc(38vh - 100px), 15.5rem);
   padding-inline: 0.25rem;
   text-shadow: 0 2px 16px rgba(0, 0, 0, 0.55);
 }
@@ -390,7 +390,7 @@
 
 .hero__invite-lead {
   margin: 0;
-  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+  font-size: clamp(1.05rem, 3.8vw, 1.3rem);
   font-weight: 600;
   color: var(--color-cream);
   line-height: 1.5;
@@ -398,14 +398,14 @@
 
 .hero__invite-name {
   margin: 0;
-  font-size: clamp(1.2rem, 4.5vw, 1.75rem);
+  font-size: clamp(1.4rem, 5.2vw, 2rem);
   font-weight: 800;
   line-height: 1.45;
 }
 
 .hero__invite-nickname {
   margin: 0;
-  font-size: clamp(1rem, 3.6vw, 1.3rem);
+  font-size: clamp(1.15rem, 4.2vw, 1.5rem);
   font-weight: 700;
   color: var(--color-gold-light);
   line-height: 1.4;
@@ -462,11 +462,11 @@
 }
 
 .hero__quote {
-  font-size: clamp(0.82rem, 2vw, 1.02rem);
+  font-size: clamp(0.92rem, 2.6vw, 1.15rem);
   color: rgba(255, 255, 255, 0.92);
   font-style: italic;
   line-height: 1.85;
-  max-width: 28rem;
+  max-width: 30rem;
   margin: 0 0 clamp(1rem, 3vw, 1.35rem);
   padding: 0 0.25rem;
   text-shadow: 0 2px 14px rgba(0, 0, 0, 0.65);
@@ -505,7 +505,7 @@
 
   .hero__content {
     width: min(100%, 44rem);
-    margin-top: clamp(13.25rem, calc(42vh - 60px), 20.25rem);
+    margin-top: clamp(10.5rem, calc(36vh - 100px), 17.5rem);
   }
 
   .hero__names {
