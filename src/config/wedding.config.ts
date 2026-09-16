@@ -80,7 +80,7 @@ export const weddingConfig = {
   },
   copy: {
     heroInviteLead: 'دعوة لحضور حفل زفاف',
-    heroInviteName: 'محمد عادل صبيح',
+    heroInviteName: 'الاستاذ محمد عادل صبيح',
     heroInviteNickname: 'ابو حسان',
     siteTitle: 'دعوة زفاف محمد صبيح (ابو حسان) - افراح آل صبيح & آل التري',
     siteDescription: 'دعوة زفاف محمد عادل صبيح (ابو حسان) — 26 سبتمبر 2026',
