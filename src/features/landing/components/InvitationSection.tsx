@@ -6,7 +6,7 @@ import { weddingConfig } from '@/config/wedding.config';
 const INVITATION_DOWNLOAD_NAME = 'wedding-invitation-abu-hassan.png';
 
 export function InvitationSection() {
-  const { media, groom, bride, event } = weddingConfig;
+  const { media, groom, event } = weddingConfig;
   const [isLightboxOpen, setIsLightboxOpen] = useState(false);
 
   const closeLightbox = useCallback(() => setIsLightboxOpen(false), []);
@@ -85,7 +85,7 @@ export function InvitationSection() {
         >
           <img
             src={media.invitation}
-            alt={`دعوة زفاف ${groom.fullName} و${bride.fullName}`}
+            alt={`دعوة زفاف ${groom.fullName} (${groom.nickname})`}
             className="invitation-section__image"
             loading="lazy"
           />
@@ -103,7 +103,7 @@ export function InvitationSection() {
         viewport={{ once: true }}
         transition={{ delay: 0.08 }}
       >
-        ملاحظة/ {event.venueDirectionNote}
+        ملاحظة: {event.venueDirectionNote}
       </motion.p>
 
       <motion.div
@@ -157,7 +157,7 @@ export function InvitationSection() {
 
               <img
                 src={media.invitation}
-                alt={`دعوة زفاف ${groom.fullName} و${bride.fullName}`}
+                alt={`دعوة زفاف ${groom.fullName} (${groom.nickname})`}
                 className="invitation-lightbox__image"
               />
 

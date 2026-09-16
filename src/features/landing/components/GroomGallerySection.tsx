@@ -23,13 +23,14 @@ export function GroomGallerySection() {
   const [progressKey, setProgressKey] = useState(0);
   const [cycleKey, setCycleKey] = useState(0);
   const [slideDirection, setSlideDirection] = useState(1);
-  const [isInView, setIsInView] = useState(true);
+  const [isInView, setIsInView] = useState(false);
 
   const sectionRef = useRef<HTMLElement>(null);
   const storyTrackRef = useRef<HTMLDivElement>(null);
   const touchStartX = useRef<number | null>(null);
   const storyItemRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const manualPauseTimer = useRef<number | null>(null);
+  const wasInViewRef = useRef(false);
 
   const clearManualPause = useCallback(() => {
     if (manualPauseTimer.current) {
@@ -108,6 +109,14 @@ export function GroomGallerySection() {
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
+
+  // إعادة مزامنة شريط التقدّم مع المؤقت عند ظهور القسم
+  useEffect(() => {
+    if (isInView && !wasInViewRef.current) {
+      setProgressKey((key) => key + 1);
+    }
+    wasInViewRef.current = isInView;
+  }, [isInView]);
 
   // جدولة الصورة التالية — فقط والقسم ظاهر
   useEffect(() => {
@@ -222,7 +231,7 @@ export function GroomGallerySection() {
 
               <div
                 key={progressKey}
-                className={`groom-slider__progress${isPaused ? ' groom-slider__progress--paused' : ''}`}
+                className={`groom-slider__progress${isPaused || !isInView ? ' groom-slider__progress--paused' : ''}`}
                 style={{ ['--groom-slider-duration' as string]: `${AUTO_PLAY_MS}ms` }}
                 aria-hidden
               />
@@ -237,9 +246,11 @@ export function GroomGallerySection() {
                     key={index === activeIndex ? `active-${progressKey}` : `segment-${index}`}
                     className={[
                       'groom-slider__segment-fill',
-                      index < activeIndex && activeIndex > 0 ? 'groom-slider__segment-fill--done' : '',
-                      index === activeIndex ? 'groom-slider__segment-fill--active' : '',
-                      index === activeIndex && isPaused ? 'groom-slider__segment-fill--paused' : '',
+                      index < activeIndex ? 'groom-slider__segment-fill--done' : '',
+                      index === activeIndex && isInView ? 'groom-slider__segment-fill--active' : '',
+                      index === activeIndex && (isPaused || !isInView)
+                        ? 'groom-slider__segment-fill--paused'
+                        : '',
                     ]
                       .filter(Boolean)
                       .join(' ')}
@@ -270,7 +281,7 @@ export function GroomGallerySection() {
                 alt={`صورة ${groom.nickname} ${activeIndex + 1}`}
                 loading={activeIndex === 0 ? 'eager' : 'lazy'}
                 decoding="async"
-                animate={{ scale: isPaused ? 1.02 : 1.05 }}
+                animate={{ scale: isPaused || !isInView ? 1.02 : 1.05 }}
                 transition={{ duration: AUTO_PLAY_MS / 1000, ease: 'linear' }}
               />
               <div className="groom-slider__shade" aria-hidden />

@@ -411,6 +411,14 @@
   line-height: 1.4;
 }
 
+.hero__invite-ampersand {
+  margin: 0.1rem 0;
+  font-size: clamp(1.1rem, 3.8vw, 1.45rem);
+  font-weight: 800;
+  color: var(--color-gold);
+  line-height: 1;
+}
+
 .hero__eyebrow {
   margin: 0;
   font-size: clamp(1.15rem, 4.2vw, 1.65rem);
@@ -1220,6 +1228,19 @@
   margin: 0 0 1.25rem;
 }
 
+.formal-text__parents {
+  display: grid;
+  gap: 0.65rem;
+  margin: 0 0 1.35rem;
+}
+
+.formal-text__parent-line {
+  margin: 0;
+  color: var(--color-cream);
+  line-height: 1.85;
+  font-size: clamp(0.95rem, 2.6vw, 1.05rem);
+}
+
 .formal-text__names-block {
   margin: 0 0 1.25rem;
 }
@@ -1229,6 +1250,12 @@
   font-weight: 900;
   line-height: 1.35;
   margin: 0;
+}
+
+.formal-text__nickname {
+  margin: 0.35rem 0 0;
+  font-size: clamp(1.2rem, 3vw, 1.55rem);
+  font-weight: 700;
 }
 
 .formal-text__ampersand {
@@ -1907,6 +1934,13 @@
   background: rgba(255, 255, 255, 0.04);
   color: var(--color-text-muted);
   font-size: 0.8rem;
+}
+
+.footer__children-note {
+  margin: 0.85rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 
 .footer__made-by-wrap {

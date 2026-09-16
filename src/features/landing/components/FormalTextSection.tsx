@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { weddingConfig } from '@/config/wedding.config';
 
 export function FormalTextSection() {
-  const { groom, bride, copy } = weddingConfig;
+  const { groom, copy } = weddingConfig;
 
   return (
     <section className="section-pad formal-text" aria-label="نص الدعوة">
@@ -17,12 +17,16 @@ export function FormalTextSection() {
         <p className="formal-text__bismillah">{copy.splashBismillah}</p>
         <p className="formal-text__intro">{copy.formalIntro}</p>
 
+        <div className="formal-text__parents">
+          <p className="formal-text__parent-line">
+            {groom.fatherName} ({groom.fatherNickname}) — نجله{' '}
+            <span className="gold-text">{groom.firstName}</span>
+          </p>
+        </div>
+
         <div className="formal-text__names-block">
           <p className="formal-text__name gold-text">{groom.fullName}</p>
-          <p className="formal-text__ampersand gold-text" aria-hidden>
-            &
-          </p>
-          <p className="formal-text__name gold-text">{bride.fullName}</p>
+          <p className="formal-text__nickname gold-text">({groom.nickname})</p>
         </div>
 
         <p className="formal-text__outro">{copy.formalOutro}</p>

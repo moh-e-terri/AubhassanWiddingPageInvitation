@@ -3,15 +3,12 @@ import { Link } from 'react-router-dom';
 import { weddingConfig } from '@/config/wedding.config';
 
 export function FooterSection() {
-  const { copy, groom, naqoot } = weddingConfig;
+  const { copy, naqoot } = weddingConfig;
 
   return (
     <footer className="footer">
       <Heart size={32} color="#c9a24d" className="footer__icon" aria-hidden />
       <p className="footer__quote">"{copy.footerQuote}"</p>
-      <p className="footer__credit">
-        {groom.nickname} — {groom.fullName}
-      </p>
 
       {naqoot.enabled && (
         <div className="footer__naqoot-row">
@@ -26,6 +23,8 @@ export function FooterSection() {
         <span>ملاحظة: {copy.noPhotosNote}</span>
         <Sparkles size={14} color="#c9a24d" aria-hidden />
       </div>
+
+      <p className="footer__children-note">{copy.childrenNote}</p>
 
       <div className="footer__made-by-wrap">
         <p className="footer__made-by">
